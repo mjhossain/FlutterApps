@@ -12,10 +12,8 @@ class MyApp extends StatelessWidget {
         body: SafeArea(
           child: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(
-                  height: 100.0,
-                ),
                 CircleAvatar(
                   radius: 80.0,
                   backgroundImage: AssetImage('images/myImage.jpg'),
@@ -40,55 +38,45 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 50.0,
+                  height: 20.0,
+                  width: 150.0,
+                  child: Divider(
+                    color: Colors.black,
+                  ),
                 ),
-                Container(
+                // This is done by using a Card() and Padding() Widget
+                Card(
                   margin:
-                      EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
-                  padding: EdgeInsets.all(20.0),
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
                   color: Colors.green,
-                  child: Center(
-                    child: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.phone,
-                        ),
-                        SizedBox(
-                          width: 30.0,
-                        ),
-                        Text(
-                          '+1 (929)990-8890',
-                          style: TextStyle(
-                            fontFamily: 'SourceCodePro',
-                            fontSize: 20.0,
-                          ),
-                        )
-                      ],
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.phone,
+                    ),
+                    title: Text(
+                      '+1 (929)990-8890',
+                      style: TextStyle(
+                        fontFamily: 'SourceCodePro',
+                        fontSize: 20.0,
+                      ),
                     ),
                   ),
                 ),
-                Container(
+                // This is done by using a Card() and ListTiles() Widget
+                Card(
                   margin:
                       EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
-                  padding: EdgeInsets.all(20.0),
                   color: Colors.green,
-                  child: Center(
-                    child: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.email,
-                        ),
-                        SizedBox(
-                          width: 30.0,
-                        ),
-                        Text(
-                          'mjhossainnyc@gmail.com',
-                          style: TextStyle(
-                            fontFamily: 'SourceCodePro',
-                            fontSize: 20.0,
-                          ),
-                        )
-                      ],
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.email,
+                    ),
+                    title: Text(
+                      'mjhossainnyc@gmail.com',
+                      style: TextStyle(
+                        fontFamily: 'SourceCodePro',
+                        fontSize: 20.0,
+                      ),
                     ),
                   ),
                 ),
