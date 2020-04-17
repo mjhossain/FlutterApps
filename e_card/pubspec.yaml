@@ -23,4 +23,11 @@ flutter:
   assets:
     - images/
 
+  fonts:
+    - family: SourceCodePro
+      fonts:
+        - asset: fonts/SourceCodePro-Medium.ttf
+    - family: Pacifico
+      fonts:
+        - asset: fonts/Pacifico-Regular.ttf
 
