@@ -25,6 +25,13 @@ class _DicePageState extends State<DicePage> {
   int leftDice = 1;
   int rightDice = 6;
 
+  void rollDice() {
+    setState(() {
+      leftDice = Random().nextInt(6) + 1;
+      rightDice = Random().nextInt(6) + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -52,10 +59,7 @@ class _DicePageState extends State<DicePage> {
             height: 60.0,
             child: RaisedButton(
               onPressed: () {
-                setState(() {
-                  leftDice = Random().nextInt(6) + 1;
-                  rightDice = Random().nextInt(6) + 1;
-                });
+                rollDice();
               },
               child: Text(
                 'Roll',
