@@ -33,7 +33,10 @@ class _BallState extends State<Ball> {
   Widget build(BuildContext context) {
     return Center(
       child: FlatButton(
-        child: Image.asset('images/ball$ballNumber.png'),
+        child: Image.asset(
+          'images/ball$ballNumber.png',
+          height: 300.0,
+        ),
         onPressed: () {
           setState(() {
             ballNumber = Random().nextInt(5) + 1;
