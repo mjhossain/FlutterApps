@@ -6,55 +6,36 @@ void main() => runApp(XylophoneApp());
 class XylophoneApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final player = AudioCache();
+    void playSound(int note) {
+      final player = AudioCache();
+      player.play('note$note.wav');
+    }
+
+    Expanded buildKey(Color color, int note) {
+      return Expanded(
+        child: FlatButton(
+          color: color,
+          onPressed: () {
+            playSound(note);
+          },
+        ),
+      );
+    }
 
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              FlatButton(
-                color: Colors.red,
-                onPressed: () {
-                  player.play('note1.wav');
-                },
-              ),
-              FlatButton(
-                color: Colors.orange,
-                onPressed: () {
-                  player.play('note2.wav');
-                },
-              ),
-              FlatButton(
-                color: Colors.yellow,
-                onPressed: () {
-                  player.play('note3.wav');
-                },
-              ),
-              FlatButton(
-                color: Colors.green,
-                onPressed: () {
-                  player.play('note4.wav');
-                },
-              ),
-              FlatButton(
-                color: Colors.cyan,
-                onPressed: () {
-                  player.play('note5.wav');
-                },
-              ),
-              FlatButton(
-                color: Colors.indigo,
-                onPressed: () {
-                  player.play('note6.wav');
-                },
-              ),
-              FlatButton(
-                color: Colors.purple,
-                onPressed: () {
-                  player.play('note7.wav');
-                },
-              ),
+              buildKey(Colors.red, 1),
+              buildKey(Colors.orange, 2),
+              buildKey(Colors.yellow, 3),
+              buildKey(Colors.green, 4),
+              buildKey(Colors.teal, 5),
+              buildKey(Colors.blue, 6),
+              buildKey(Colors.purple, 7),
             ],
           ),
         ),
