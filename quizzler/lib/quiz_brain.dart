@@ -44,4 +44,6 @@ class QuizBrain {
   bool getAnswer() {
     return _questions[_qNum].answer;
   }
+
+  void resetQ() => _qNum = 0;
 }
