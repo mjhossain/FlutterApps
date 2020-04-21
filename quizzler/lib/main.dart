@@ -83,6 +83,7 @@ class _QuizPageState extends State<QuizPage> {
       context: context,
       style: AlertStyle(
         isCloseButton: false,
+        isOverlayTapDismiss: false,
       ),
       image: Image.asset('assets/$image.png'),
       title: "Quiz Complete",
