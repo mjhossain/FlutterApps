@@ -38,8 +38,18 @@ class _QuizPageState extends State<QuizPage> {
     });
   }
 
+  String image = '';
+  String message = '';
   void checkScore(uAns) {
     if (scoreKeeper.length == 12) {
+      image = quizBrain.gamePoint();
+      if (image == 'win') {
+        message = 'Congratulations! You Won!';
+      } else if (image == 'draw') {
+        message = 'Thats a Tie!';
+      } else {
+        message = 'Awh! Try again!';
+      }
       _quizComplete(context);
     } else {
       checkAnswer(uAns);
@@ -48,13 +58,16 @@ class _QuizPageState extends State<QuizPage> {
 
   void checkAnswer(bool uAns) {
     bool correctAns = quizBrain.getAnswer();
+
     setState(() {
       if (uAns == correctAns) {
+        quizBrain.correctAnswer();
         scoreKeeper.add(Icon(
           Icons.check,
           color: Colors.green,
         ));
       } else {
+        quizBrain.wrongAnswer();
         scoreKeeper.add(Icon(
           Icons.close,
           color: Colors.red,
@@ -69,11 +82,11 @@ class _QuizPageState extends State<QuizPage> {
     Alert(
       context: context,
       style: AlertStyle(
-        isCloseButton: false;
+        isCloseButton: false,
       ),
-      type: AlertType.info,
+      image: Image.asset('assets/$image.png'),
       title: "Quiz Complete",
-      desc: "You have answered all questions!",
+      desc: message,
       buttons: [
         DialogButton(
           child: Text(

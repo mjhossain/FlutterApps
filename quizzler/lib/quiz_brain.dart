@@ -2,6 +2,8 @@ import 'questions.dart';
 
 class QuizBrain {
   int _qNum = 0;
+  int _rightAnswers = 0;
+  int _wrongAnswers = 0;
 
   List<Question> _questions = [
     Question('Some cats are actually allergic to humans', true),
@@ -45,5 +47,27 @@ class QuizBrain {
     return _questions[_qNum].answer;
   }
 
-  void resetQ() => _qNum = 0;
+  void correctAnswer() {
+    _rightAnswers++;
+  }
+
+  void wrongAnswer() {
+    _wrongAnswers++;
+  }
+
+  void resetQ() {
+    _qNum = 0;
+    _rightAnswers = 0;
+    _wrongAnswers = 0;
+  }
+
+  String gamePoint() {
+    if (_rightAnswers > _wrongAnswers) {
+      return 'win';
+    } else if (_rightAnswers == _wrongAnswers) {
+      return 'draw';
+    } else {
+      return 'lose';
+    }
+  }
 }
