@@ -4,6 +4,7 @@ import 'reusable_card.dart';
 import 'icon_content.dart';
 import 'constants.dart';
 import 'round_button.dart';
+import 'result.dart';
 
 enum Gender { male, female }
 
@@ -22,12 +23,14 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: kSecondSecondaryColor,
           title: Text(
             'BMI CALCULATOR',
             style: TextStyle(
-                color: kSecondSecondaryColor,
-                fontSize: 30.0,
-                fontWeight: FontWeight.w700),
+              color: Colors.white,
+              fontSize: 30.0,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
         body: Column(
@@ -231,11 +234,26 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            Container(
-              color: kSecondSecondaryColor,
-              width: double.infinity,
-              margin: EdgeInsets.only(top: 10.0),
-              height: kBottomContainerHeight,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ResultsPage()));
+              },
+              child: Container(
+                color: kSecondSecondaryColor,
+                width: double.infinity,
+                margin: EdgeInsets.only(top: 10.0),
+                height: kBottomContainerHeight,
+                child: Center(
+                  child: Text(
+                    'RESULTS',
+                    style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white),
+                  ),
+                ),
+              ),
             ),
           ],
         ));
