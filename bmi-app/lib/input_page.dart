@@ -28,7 +28,7 @@ class _InputPageState extends State<InputPage> {
             'BMI CALCULATOR',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 30.0,
+              fontSize: 20.0,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -246,9 +246,9 @@ class _InputPageState extends State<InputPage> {
                 height: kBottomContainerHeight,
                 child: Center(
                   child: Text(
-                    'RESULTS',
+                    'CALCULATE',
                     style: TextStyle(
-                        fontSize: 30.0,
+                        fontSize: 25.0,
                         fontWeight: FontWeight.w700,
                         color: Colors.white),
                   ),

@@ -11,7 +11,7 @@ class ResultsPage extends StatelessWidget {
           'BMI CALCULATOR',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 30.0,
+            fontSize: 20.0,
             fontWeight: FontWeight.w700,
           ),
         ),
