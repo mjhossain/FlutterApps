@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 const double kBottomContainerHeight = 80.0;
 const kBottomContainerColor = Color(0xFFEB1555);
@@ -17,3 +18,9 @@ const kLabelTextStyle = TextStyle(
 
 const kNumberTextStyle =
     TextStyle(fontSize: 50.0, fontWeight: FontWeight.w900, color: Colors.black);
+
+const kBMINum = TextStyle(
+  fontSize: 100.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+);

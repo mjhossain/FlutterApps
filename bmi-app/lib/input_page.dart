@@ -5,6 +5,7 @@ import 'icon_content.dart';
 import 'constants.dart';
 import 'round_button.dart';
 import 'result.dart';
+import 'bottom_button.dart';
 
 enum Gender { male, female }
 
@@ -81,16 +82,16 @@ class _InputPageState extends State<InputPage> {
                 childCard: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    SizedBox(
-                      height: 20.0,
-                    ),
+//                    SizedBox(
+//                      height: 20.0,
+//                    ),
                     Text(
                       'HEIGHT',
                       style: kLabelTextStyle,
                     ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
+//                    SizedBox(
+//                      height: 10.0,
+//                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -145,16 +146,16 @@ class _InputPageState extends State<InputPage> {
                             'WEIGHT',
                             style: kLabelTextStyle,
                           ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
+//                          SizedBox(
+//                            height: 10.0,
+//                          ),
                           Text(
                             weight.toString(),
                             style: kNumberTextStyle,
                           ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
+//                          SizedBox(
+//                            height: 10.0,
+//                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -193,16 +194,16 @@ class _InputPageState extends State<InputPage> {
                             'AGE',
                             style: kLabelTextStyle,
                           ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
+//                          SizedBox(
+//                            height: 10.0,
+//                          ),
                           Text(
                             age.toString(),
                             style: kNumberTextStyle,
                           ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
+//                          SizedBox(
+//                            height: 10.0,
+//                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -234,26 +235,12 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            GestureDetector(
+            BottomButton(
+              text: 'CALCULATE',
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ResultsPage()));
               },
-              child: Container(
-                color: kSecondSecondaryColor,
-                width: double.infinity,
-                margin: EdgeInsets.only(top: 10.0),
-                height: kBottomContainerHeight,
-                child: Center(
-                  child: Text(
-                    'CALCULATE',
-                    style: TextStyle(
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white),
-                  ),
-                ),
-              ),
             ),
           ],
         ));
