@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
+import 'coin_data.dart';
+import 'package:flutter/cupertino.dart';
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -6,46 +9,101 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
+  String selectedCurrency = 'USD';
+
+  Widget getDropdown() {
+    List<DropdownMenuItem<String>> dropDownItems = [];
+    for (String item in currenciesList) {
+      var dropDownItem = DropdownMenuItem(
+        child: Text(item),
+        value: item,
+      );
+      dropDownItems.add(dropDownItem);
+    }
+
+    return DropdownButton(
+      value: selectedCurrency,
+      items: dropDownItems,
+      onChanged: (value) {
+        setState(() {
+          selectedCurrency = value;
+          print(value);
+        });
+      },
+    );
+  }
+
+  Widget getPicker() {
+    List<Widget> pickerItems = [];
+    for (String item in currenciesList) {
+      var textItem = Text(item);
+      pickerItems.add(textItem);
+    }
+
+    return CupertinoPicker(
+        itemExtent: 34.0,
+        onSelectedItemChanged: (index) {
+          print(currenciesList[index]);
+        },
+        children: pickerItems);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('🤑 Coin Ticker'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-            child: Card(
-              color: Colors.lightBlueAccent,
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-                child: Text(
-                  '1 BTC = ? USD',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
+        appBar: AppBar(
+          title: Text('🤑 Coin Ticker'),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
+              child: Card(
+                color: Colors.lightBlueAccent,
+                elevation: 5.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+                  child: Text(
+                    '1 BTC = ? USD',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          Container(
-            height: 150.0,
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(bottom: 30.0),
-            color: Colors.lightBlue,
-            child: null,
-          ),
-        ],
-      ),
-    );
+            Container(
+              height: 150.0,
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(bottom: 30.0),
+              color: Colors.lightBlue,
+              child: Platform.isIOS ? getPicker() : getDropdown(),
+            )
+          ],
+        ));
   }
 }
+
+/*
+
+currenciesList.map<DropdownMenuItem<String>>((String val) {
+                return DropdownMenuItem(
+                  value: val,
+                  child: Text(val),
+                );
+              }).toList()
+ */
+
+/*
+Andorid DropdownMenuItem
+
+
+ */
