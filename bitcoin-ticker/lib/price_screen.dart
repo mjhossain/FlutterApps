@@ -11,19 +11,39 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
   CoinData cData = CoinData();
-  String coinSymbol = 'BTC';
-  int coinPrice;
+  String bitCoinSymbol = 'BTC';
+  int bitCoinPrice;
+  String liteCoinSymbol = 'LTC';
+  int liteCoinPrice;
+  String ethCoinSymbol = 'ETH';
+  int ethCoinPrice;
 
   void updateUI(String currency) async {
-    var coinData = await cData.getBitCoinData('BTC', currency);
+    var bitCoinData = await cData.getBitCoinData(currency);
+    var ltcCoinData = await cData.getLiteCoinData(currency);
+    var ethCoinData = await cData.getEthCoinData(currency);
+
     setState(() {
-      if (coinData == null) {
-        coinSymbol = 'NULL';
-        coinPrice = 0000;
+      if (bitCoinData == null || ltcCoinData == null || ethCoinData == null) {
+        bitCoinSymbol = 'NULL';
+        bitCoinPrice = 0000;
+        liteCoinPrice = 0000;
+        liteCoinSymbol = 'NULL';
+        ethCoinPrice = 0000;
+        ethCoinSymbol = 'NULL';
       }
       selectedCurrency = currency;
-      double cPrice = coinData['data'][coinSymbol]['quote'][currency]['price'];
-      coinPrice = cPrice.floor();
+      double cPrice =
+          bitCoinData['data'][bitCoinSymbol]['quote'][currency]['price'];
+      bitCoinPrice = cPrice.floor();
+
+      double lPrice =
+          ltcCoinData['data'][liteCoinSymbol]['quote'][currency]['price'];
+      liteCoinPrice = lPrice.floor();
+
+      double ePrice =
+          ethCoinData['data'][ethCoinSymbol]['quote'][currency]['price'];
+      ethCoinPrice = ePrice.floor();
     });
   }
 
@@ -63,30 +83,6 @@ class _PriceScreenState extends State<PriceScreen> {
         children: pickerItems);
   }
 
-  Widget getCoins() {
-    List<Widget> coins = [];
-    // TODO : Create the list of Coin Widgets
-    Card(
-      color: Colors.lightBlueAccent,
-      elevation: 5.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Padding(
-        padding:
-        EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-        child: Text(
-          '1 BTC = ${coinPrice.toString()} $selectedCurrency',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 20.0,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    ),
-  }
-
   @override
   void initState() {
     super.initState();
@@ -103,28 +99,18 @@ class _PriceScreenState extends State<PriceScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-              child: Card(
-                color: Colors.lightBlueAccent,
-                elevation: 5.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-                  child: Text(
-                    '1 BTC = ${coinPrice.toString()} $selectedCurrency',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            CoinDataCard(
+                coinPrice: bitCoinPrice,
+                selectedCurrency: selectedCurrency,
+                coinSymbol: bitCoinSymbol),
+            CoinDataCard(
+                coinPrice: liteCoinPrice,
+                selectedCurrency: selectedCurrency,
+                coinSymbol: liteCoinSymbol),
+            CoinDataCard(
+                coinPrice: ethCoinPrice,
+                selectedCurrency: selectedCurrency,
+                coinSymbol: ethCoinSymbol),
             Container(
               height: 150.0,
               alignment: Alignment.center,
@@ -134,6 +120,43 @@ class _PriceScreenState extends State<PriceScreen> {
             )
           ],
         ));
+  }
+}
+
+class CoinDataCard extends StatelessWidget {
+  const CoinDataCard({
+    @required this.coinPrice,
+    @required this.selectedCurrency,
+    @required this.coinSymbol,
+  });
+
+  final int coinPrice;
+  final String selectedCurrency;
+  final String coinSymbol;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(18.0, 12.0, 18.0, 0),
+      child: Card(
+        color: Colors.lightBlueAccent,
+        elevation: 5.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+          child: Text(
+            '1 $coinSymbol = ${coinPrice.toString()} $selectedCurrency',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20.0,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
