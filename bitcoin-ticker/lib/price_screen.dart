@@ -10,6 +10,22 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
+  CoinData cData = CoinData();
+  String coinSymbol = 'BTC';
+  int coinPrice;
+
+  void updateUI(String currency) async {
+    var coinData = await cData.getBitCoinData('BTC', currency);
+    setState(() {
+      if (coinData == null) {
+        coinSymbol = 'NULL';
+        coinPrice = 0000;
+      }
+      selectedCurrency = currency;
+      double cPrice = coinData['data'][coinSymbol]['quote'][currency]['price'];
+      coinPrice = cPrice.floor();
+    });
+  }
 
   Widget getDropdown() {
     List<DropdownMenuItem<String>> dropDownItems = [];
@@ -26,8 +42,7 @@ class _PriceScreenState extends State<PriceScreen> {
       items: dropDownItems,
       onChanged: (value) {
         setState(() {
-          selectedCurrency = value;
-          print(value);
+          updateUI(value);
         });
       },
     );
@@ -43,9 +58,39 @@ class _PriceScreenState extends State<PriceScreen> {
     return CupertinoPicker(
         itemExtent: 34.0,
         onSelectedItemChanged: (index) {
-          print(currenciesList[index]);
+          updateUI(currenciesList[index]);
         },
         children: pickerItems);
+  }
+
+  Widget getCoins() {
+    List<Widget> coins = [];
+    // TODO : Create the list of Coin Widgets
+    Card(
+      color: Colors.lightBlueAccent,
+      elevation: 5.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Padding(
+        padding:
+        EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+        child: Text(
+          '1 BTC = ${coinPrice.toString()} $selectedCurrency',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20.0,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ),
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    updateUI(selectedCurrency);
   }
 
   @override
@@ -70,7 +115,7 @@ class _PriceScreenState extends State<PriceScreen> {
                   padding:
                       EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                   child: Text(
-                    '1 BTC = ? USD',
+                    '1 BTC = ${coinPrice.toString()} $selectedCurrency',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20.0,
