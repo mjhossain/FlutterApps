@@ -33,3 +33,13 @@ const kTextFieldDecoration = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
 );
+
+const kMeChats = BorderRadius.only(
+    topLeft: Radius.circular(30.0),
+    bottomRight: Radius.circular(30.0),
+    bottomLeft: Radius.circular(30.0));
+
+const kOtherChats = BorderRadius.only(
+    topRight: Radius.circular(30.0),
+    bottomRight: Radius.circular(30.0),
+    bottomLeft: Radius.circular(30.0));
