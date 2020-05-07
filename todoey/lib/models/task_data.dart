@@ -9,4 +9,14 @@ class TaskData extends ChangeNotifier {
   int get taskCount {
     return tasks.length;
   }
+
+  void addTask(String taskName) {
+    tasks.add(Task(name: taskName));
+    notifyListeners();
+  }
+
+  void toggleTask(Task task) {
+    task.toggleTaskState();
+    notifyListeners();
+  }
 }
